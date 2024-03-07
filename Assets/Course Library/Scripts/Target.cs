@@ -34,12 +34,18 @@ Vector3 RandomSpawnPos() {
     return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
 }
 private void OnMousedown() {
-    Destroy(gameObject);
+   
+    if (gameManager.isGameActive) 
+    {
+        Destroy(gameObject);
     gameManager.UpdateScore(pointValue);
     Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+    }
 }
-private void OnTriggerEnter(Collider other){
+private void OnTriggerEnter(Collider other)
+{
     Destroy(gameObject);
+    if (!gameObject.CompareTag("Bad")) {gameManager.GameOver();}
 }
     // Update is called once per frame
     void Update()
