@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
        UpdateScore(0);
        gameOverText.gameObject.SetActive(true);
        isGameActive = true;
+       
     }
 
     // Update is called once per frame
@@ -56,4 +57,5 @@ public class GameManager : MonoBehaviour
     {
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    
 }
