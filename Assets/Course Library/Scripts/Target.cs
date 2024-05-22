@@ -27,30 +27,31 @@ public class Target : MonoBehaviour
     Vector3 RandomForce() {
         return Vector3.up * Random.Range(minSpeed, maxSpeed);
     }
-float RandomTorque()
-{
-    return Random.Range(-maxTorque, maxTorque);
-}
-Vector3 RandomSpawnPos() {
-    return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
-}
-private void OnMousedown() {
-   
-    if (gameManager.isGameActive) 
+    float RandomTorque()
+    {
+        return Random.Range(-maxTorque, maxTorque);
+    }
+    Vector3 RandomSpawnPos() 
+    {
+        return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
+    }
+        private void OnMouseDown() 
+    {
+    
+        if (gameManager.isGameActive) 
+        {
+            Destroy(gameObject);
+        gameManager.UpdateScore(pointValue);
+        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
-    gameManager.UpdateScore(pointValue);
-    Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+        if (!gameObject.CompareTag("Bad")) 
+        {
+            gameManager.GameOver();
+        }
     }
-}
-private void OnTriggerEnter(Collider other)
-{
-    Destroy(gameObject);
-    if (!gameObject.CompareTag("Bad")) {gameManager.GameOver();}
-}
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
