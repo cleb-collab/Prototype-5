@@ -659,6 +659,8 @@ MonoBehaviour:
   restartButton: {fileID: 1559384889}
   titleScreen: {fileID: 479775042}
   isGameActive: 0
+  livesText: {fileID: 1206044886}
+  health: 3
 --- !u!4 &478560769
 Transform:
   m_ObjectHideFlags: 0
