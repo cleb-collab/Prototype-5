@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
     private int score;
     private float spawnRate = 1.0f;
+    public TextMeshProUGUI livesText;
+    public int health = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -69,4 +71,21 @@ public class GameManager : MonoBehaviour
 
         titleScreen.gameObject.SetActive(false);
     }
+     void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Bad"))
+        {
+            if (health < 1)
+            {
+                health = 0;
+                Debug.Log("Game Over!");
+            }else
+            {
+                health -= 1;
+                Destroy(collision.gameObject);
+                Debug.Log("Lives " + health);
+            }
+               
+        }
+    }    
 }
