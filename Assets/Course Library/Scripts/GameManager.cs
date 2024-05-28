@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
     public GameObject titleScreen;
+    public GameObject pauseScreen;
     public bool isGameActive;
     private int score;
     private float spawnRate = 1.0f;
@@ -20,10 +21,14 @@ public class GameManager : MonoBehaviour
     private int health;
     public bool isGamepaused;
 
+    public Slider volumeSlider;
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-
+      volumeSlider.value = 1;
+      volumeSlider.onValueChanged.AddListener(delegate{ValueChangeCheck();});
     }
 
     // Update is called once per frame
@@ -32,6 +37,12 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void ValueChangeCheck()
+        {
+            audioSource.volume = volumeSlider.value;
+            Debug.Log(volumeSlider.value);
+        }
+    
     IEnumerator SpawnTarget()
     {
         while(isGameActive)
@@ -89,6 +100,15 @@ public class GameManager : MonoBehaviour
 
         titleScreen.gameObject.SetActive(false);
     }
-    
+    public void PauseGame()
+    {
+        pauseScreen.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        pauseScreen.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
 
 }
